@@ -97,17 +97,18 @@
                         box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px, rgba(0, 0, 0, 0.3) 0px 1px;
             }
             #main_references {
-                padding: 0;
+                padding: 0 80px 0 48px;
                 margin: 96px auto 0;
                 white-space: nowrap;
                 position: relative;
+                min-width: 768px;
                 max-width: 1024px;
             }
             #main_references > h1 {
                 margin: 0;
                 padding: 0;
                 position: absolute;
-                left: -17em;
+                left: -15em;
                 top: -1em;
                 width: 15em;
                 line-height: 2em;
@@ -149,9 +150,10 @@
 /* entire container, keeps perspective */
 #main_references article {
     text-align: center;
-    margin: 0;
+    margin: 0 5px;
     padding: 0;
     display: inline-block;
+    width: 33.33%;
     -webkit-perspective: 1000;
     -moz-perspective: 1000;
     perspective: 1000;
@@ -169,8 +171,6 @@
 }
 
 #main_references article, #main_references article > div > header, #main_references article > div > div {
-    width: 256px;
-    /*height: 256px;*/
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
         -ms-box-sizing: border-box;
@@ -180,23 +180,17 @@
 
 #main_references article > div > header {
     padding: 32px 64px;
+    height: 214px; /* 182 + 32 */
 }
 #main_references article > div > div {
     padding: 16px;
 }
 
-#main_references article {
-    margin: 0 32px;
-}
-#main_references article:first-of-type {
-    margin-left: 64px;
-}
-#main_references article:last-of-type {
-    margin-right: 64px;
-}
-
 /* flip speed goes here */
 #main_references article > div {
+    margin: 0 auto;
+    width: 256px;
+    min-height: 214px;
     -webkit-transition: 0.6s;
        -moz-transition: 0.6s;
             transition: 0.6s;
@@ -210,6 +204,7 @@
 
 /* hide back of pane during swap */
 #main_references article > div > header, #main_references article > div > div {
+    width: 256px;
     -webkit-transition: opacity 0.6s;
        -moz-transition: opacity 0.6s;
             transition: opacity 0.6s;
