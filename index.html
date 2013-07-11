@@ -46,7 +46,7 @@
                 border-bottom: solid #ccc 10px;
                 margin: 0;
                 padding: 20px;
-                padding-bottom: 0;
+                padding-bottom: 70px;
                 background: rgba(255, 255, 255, 0.7);
                 -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
                    -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
@@ -88,8 +88,11 @@
                 width: 128px;
                 height: 128px;
                 background: url(stephane-angel/stephane-angel.128.jpg) center center no-repeat;
-                margin-bottom: -84px;
                 border: solid #ccc 10px;
+                position: absolute;
+                left: 50%;
+                margin-bottom: -84px;
+                margin-left: -74px;
                 -webkit-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px, rgba(0, 0, 0, 0.3) 0px 1px;
                    -moz-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px, rgba(0, 0, 0, 0.3) 0px 1px;
                     -ms-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px, rgba(0, 0, 0, 0.3) 0px 1px;
@@ -155,8 +158,10 @@
     display: inline-block;
     width: 33.33%;
     -webkit-perspective: 1000;
-    -moz-perspective: 1000;
-    perspective: 1000;
+       -moz-perspective: 1000;
+        -ms-perspective: 1000;
+         -o-perspective: 1000;
+            perspective: 1000;
 }
 
 #main_references article h1 {
@@ -167,6 +172,8 @@
 #main_references article:hover > div, #main_references article.hover > div {
 -webkit-transform: rotateY(-180deg);
    -moz-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+     -o-transform: rotateY(-180deg);
         transform: rotateY(-180deg);
 }
 
@@ -193,10 +200,14 @@
     min-height: 214px;
     -webkit-transition: 0.6s;
        -moz-transition: 0.6s;
+        -ms-transition: 0.6s;
+         -o-transition: 0.6s;
             transition: 0.6s;
 
     -webkit-transform-style: preserve-3d;
        -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+         -o-transform-style: preserve-3d;
             transform-style: preserve-3d;
 
     position: relative;
@@ -207,6 +218,8 @@
     width: 256px;
     -webkit-transition: opacity 0.6s;
        -moz-transition: opacity 0.6s;
+        -ms-transition: opacity 0.6s;
+         -o-transition: opacity 0.6s;
             transition: opacity 0.6s;
 
     position: absolute;
@@ -232,11 +245,14 @@
 #main_references article > div > div {
     -webkit-backface-visibility: hidden;
        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+         -o-backface-visibility: hidden;
             backface-visibility: hidden;
     -webkit-transform: rotateY(-180deg);
        -moz-transform: rotateY(-180deg);
+        -ms-transform: rotateY(-180deg);
+         -o-transform: rotateY(-180deg);
             transform: rotateY(-180deg);
-    /*box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5)*/
 }
 
 #main_references article > div > div {
@@ -311,17 +327,115 @@ ul.technos li {
     border-radius: 4px
 }
 
+/*.menu-btn {
+    border-bottom: 17px double black;
+    border-top: 6px solid black;
+    content:"";
+    height: 5px;
+    width:30px;
+}*/
+
+body > header nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    height: 90px;
+}
+body > header nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 32px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+body > header nav li {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -16px;
+    -webkit-transition: 0.6s;
+       -moz-transition: 0.6s;
+        -ms-transition: 0.6s;
+         -o-transition: 0.6s;
+            transition: 0.6s;
+}
+body > header nav a {
+    display: block;
+    width: 32px;
+    height: 32px;
+}
+body > header nav li.mail {
+    background: url('contact/mail.png') top left no-repeat;
+}
+body > header:hover nav li.mail,
+body > header.hover nav li.mail {
+    -webkit-transform: translate(-100px, -5px);
+       -moz-transform: translate(-100px, -5px);
+        -ms-transform: translate(-100px, -5px);
+         -o-transform: translate(-100px, -5px);
+            transform: translate(-100px, -5px);
+}
+body > header nav li.linkedin {
+    background: url('contact/linkedin.png') top left no-repeat;
+}
+body > header:hover nav li.linkedin,
+body > header.hover nav li.linkedin {
+    -webkit-transform: translate(-75px, -50px);
+       -moz-transform: translate(-75px, -50px);
+        -ms-transform: translate(-75px, -50px);
+         -o-transform: translate(-75px, -50px);
+            transform: translate(-75px, -50px);
+}
+body > header nav li.twitter {
+    background: url('contact/twitter.png') top left no-repeat;
+}
+body > header:hover nav li.twitter,
+body > header.hover nav li.twitter {
+    -webkit-transform: translate(75px, -50px);
+       -moz-transform: translate(75px, -50px);
+        -ms-transform: translate(75px, -50px);
+         -o-transform: translate(75px, -50px);
+            transform: translate(75px, -50px);
+}
+body > header nav li.github {
+    background: url('contact/github.png') top left no-repeat;
+}
+body > header:hover nav li.github,
+body > header.hover nav li.github {
+    -webkit-transform: translate(100px, -5px);
+       -moz-transform: translate(100px, -5px);
+        -ms-transform: translate(100px, -5px);
+         -o-transform: translate(100px, -5px);
+            transform: translate(100px, -5px);
+}
+body > header nav span {
+    display: none;
+}
         </style>
     </head>
     <body>
         <img class="bg" src="background/background-eiffel.jpg" />
-        <header>
+        <header ontouchstart="this.classList.toggle('hover');">
             <h1>
                 Stéphane «Twidi» Angel
             </h1>
             <h2>
                 Met en œuvre vos sites et applications web et mobiles
             </h2>
+            <nav>
+                <ul>
+                    <li class="mail"><a href="mailto:s.angel@twidi.com" title="s.angel@twidi.com"><span>s.angel@twidi.com</span></a></li>
+                    <li class="linkedin"><a href="http://www.linkedin.com/in/stephaneangel" target="_blank" title="Stéphane Angel on LinkedIn"><span>LinkedIn</span></a></li>
+                    <li class="twitter"><a href="https://twitter.com/twidi" target="_blank" title="Twidi on Twitter"><span>twitter.com/twidi</span></a></li>
+                    <li class="github"><a href="https://github.com/twidi" target="_blank" title="Twidi on Github"><span>github.com/twidi</span></a></li>
+                </ul>
+            </nav>
         </header>
         <main>
             <section id="main_references">  
