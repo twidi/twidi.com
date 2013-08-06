@@ -14,6 +14,79 @@
             main, header {
                 display: block;
             }
+
+            .flip-container {
+                -webkit-perspective: 1000;
+                   -moz-perspective: 1000;
+                    -ms-perspective: 1000;
+                     -o-perspective: 1000;
+                        perspective: 1000;
+            }
+
+            .flip-wrapper {
+                -webkit-transition: 0.6s;
+                   -moz-transition: 0.6s;
+                    -ms-transition: 0.6s;
+                     -o-transition: 0.6s;
+                        transition: 0.6s;
+
+                -webkit-transform-style: preserve-3d;
+                   -moz-transform-style: preserve-3d;
+                    -ms-transform-style: preserve-3d;
+                     -o-transform-style: preserve-3d;
+                        transform-style: preserve-3d;
+
+                position: relative;
+            }
+
+            .flip-trigger:hover .flip-wrapper,
+            .flip-trigger.hover .flip-wrapper {
+                -webkit-transform: rotateY(-180deg);
+                   -moz-transform: rotateY(-180deg);
+                    -ms-transform: rotateY(-180deg);
+                     -o-transform: rotateY(-180deg);
+                        transform: rotateY(-180deg);
+            }
+            .flip-face, .flip-back {
+                -webkit-transition: opacity 0.6s;
+                   -moz-transition: opacity 0.6s;
+                    -ms-transition: opacity 0.6s;
+                     -o-transition: opacity 0.6s;
+                        transition: opacity 0.6s;
+
+                opacity: 1;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .flip-face {
+                z-index: 2;
+            }
+            .flip-back {
+                z-index: 1;
+                -webkit-backface-visibility: hidden;
+                   -moz-backface-visibility: hidden;
+                    -ms-backface-visibility: hidden;
+                     -o-backface-visibility: hidden;
+                        backface-visibility: hidden;
+                -webkit-transform: rotateY(-180deg);
+                   -moz-transform: rotateY(-180deg);
+                    -ms-transform: rotateY(-180deg);
+                     -o-transform: rotateY(-180deg);
+                        transform: rotateY(-180deg);
+            }
+            .flip-back,
+            .flip-trigger:hover .flip-face,
+            .flip-trigger.hover .flip-face {
+                opacity: 0.1;
+            }
+            .flip-face,
+            .flip-trigger:hover .flip-back,
+            .flip-trigger.hover .flip-back {
+                opacity: 1;
+            }
+
+
             /* fixed not supported on some mobile browser (YES I'M TALKING TO YOU GOOGLE)
             body {
                 background: url(background/background-eiffel.jpg) center top no-repeat fixed;
@@ -77,8 +150,8 @@
                         text-shadow: 1px 1px 0 white;
                 color: #333;
             }
-            body > header:after {
-                content: '';
+            body > header aside {
+                background: #eee;
                 display: inline-block;
                 -webkit-border-radius: 50%;
                    -moz-border-radius: 50%;
@@ -87,18 +160,56 @@
                         border-radius: 50%;
                 width: 128px;
                 height: 128px;
-                background: url(stephane-angel/stephane-angel.128.jpg) center center no-repeat;
-                border: solid #ccc 10px;
                 position: absolute;
                 left: 50%;
                 margin-bottom: -84px;
                 margin-left: -74px;
-                -webkit-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px, rgba(0, 0, 0, 0.3) 0px 1px;
-                   -moz-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px, rgba(0, 0, 0, 0.3) 0px 1px;
-                    -ms-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px, rgba(0, 0, 0, 0.3) 0px 1px;
-                     -o-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px, rgba(0, 0, 0, 0.3) 0px 1px;
-                        box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px, rgba(0, 0, 0, 0.3) 0px 1px;
+                border: solid #ccc 10px;
+                -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+                   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+                    -ms-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+                     -o-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+                        box-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
             }
+            body > header aside > div > div {
+                width: 128px;
+                height: 128px;
+                -webkit-border-radius: 50%;
+                   -moz-border-radius: 50%;
+                    -ms-border-radius: 50%;
+                     -o-border-radius: 50%;
+                        border-radius: 50%;
+                -webkit-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px;
+                   -moz-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px;
+                    -ms-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px;
+                     -o-box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px;
+                        box-shadow: inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px;
+            }
+/*body > header:hover #main-photo, body > header.hover #main-photo {
+    opacity: 0.1;
+}
+body > header #main-photo, body > header #main-photo,
+body > header:hover #cv-link, body > header.hover #cv-link {
+    opacity: 1;
+}
+*/            #main-photo {
+                background: url(stephane-angel/stephane-angel.128.jpg) center center no-repeat;
+            }
+            #cv-link {
+                background: rgba(255, 255, 255, 0.7);
+                text-align: center;
+            }
+            #cv-link a {
+                line-height: 128px;
+                font-size: 30px;
+                letter-spacing: 5px;
+                font-weight: bold;
+                color: #333;
+                font-family: 'Julius Sans One', sans-serif;
+                text-decoration: none;
+
+            }
+
             #main_references {
                 padding: 0 80px 0 48px;
                 margin: 96px auto 0;
@@ -151,31 +262,16 @@
                 max-width: 90%;
             }
 
-/* entire container, keeps perspective */
 #main_references article {
     text-align: center;
     margin: 0 5px;
     padding: 0;
     display: inline-block;
     width: 33.33%;
-    -webkit-perspective: 1000;
-       -moz-perspective: 1000;
-        -ms-perspective: 1000;
-         -o-perspective: 1000;
-            perspective: 1000;
 }
 
 #main_references article h1 {
     display: none;
-}
-
-/* flip the pane when hovered */
-#main_references article:hover > div, #main_references article.hover > div {
--webkit-transform: rotateY(-180deg);
-   -moz-transform: rotateY(-180deg);
-    -ms-transform: rotateY(-180deg);
-     -o-transform: rotateY(-180deg);
-        transform: rotateY(-180deg);
 }
 
 #main_references article, #main_references article > div > header, #main_references article > div > div {
@@ -194,38 +290,14 @@
     padding: 16px;
 }
 
-/* flip speed goes here */
 #main_references article > div {
     margin: 0 auto;
     width: 256px;
     min-height: 214px;
-    -webkit-transition: 0.6s;
-       -moz-transition: 0.6s;
-        -ms-transition: 0.6s;
-         -o-transition: 0.6s;
-            transition: 0.6s;
-
-    -webkit-transform-style: preserve-3d;
-       -moz-transform-style: preserve-3d;
-        -ms-transform-style: preserve-3d;
-         -o-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-
-    position: relative;
 }
 
-/* hide back of pane during swap */
 #main_references article > div > header, #main_references article > div > div {
     width: 256px;
-    -webkit-transition: opacity 0.6s;
-       -moz-transition: opacity 0.6s;
-        -ms-transition: opacity 0.6s;
-         -o-transition: opacity 0.6s;
-            transition: opacity 0.6s;
-
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 #main_references article:hover > div > header, #main_references article.hover > div > header,
@@ -235,25 +307,6 @@
 #main_references article > div > header, #main_references article > div > header,
 #main_references article:hover > div > div, #main_references article.hover > div > div {
     opacity: 1;
-}
-
-/* front pane, placed above back */
-#main_references article > div > header {
-    z-index: 2;
-}
-
-/* back, initially hidden pane */
-#main_references article > div > div {
-    -webkit-backface-visibility: hidden;
-       -moz-backface-visibility: hidden;
-        -ms-backface-visibility: hidden;
-         -o-backface-visibility: hidden;
-            backface-visibility: hidden;
-    -webkit-transform: rotateY(-180deg);
-       -moz-transform: rotateY(-180deg);
-        -ms-transform: rotateY(-180deg);
-         -o-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
 }
 
 #main_references article > div > div {
@@ -422,7 +475,7 @@ body > header nav span {
     </head>
     <body>
         <img class="bg" src="background/background-eiffel.jpg" />
-        <header ontouchstart="this.classList.toggle('hover');">
+        <header class="flip-trigger" ontouchstart="this.classList.toggle('hover');">
             <h1>
                 Stéphane «Twidi» Angel
             </h1>
@@ -437,17 +490,23 @@ body > header nav span {
                     <li class="github"><a href="https://github.com/twidi" target="_blank" title="Twidi on Github"><span>github.com/twidi</span></a></li>
                 </ul>
             </nav>
+            <aside class="flip-container">
+                <div class="flip-wrapper">
+                    <div id="main-photo" class="flip-face"></div>
+                    <div id="cv-link" class="flip-back"><a href="/cv_angel.pdf" title="Lien vers mon CV en PDF">CV</a></div>
+                </div>
+            </aside>
         </header>
         <main>
             <section id="main_references">  
                 <h1>Expérience récente</h1>
-                <article ontouchstart="this.classList.toggle('hover');">
-                    <div>
-                        <header>
+                <article class="flip-container flip-trigger" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flip-wrapper">
+                        <header class="flip-face">
                             <h1>Gandi.net</h1>
                             <img src="references/logo-gandi.png" />
                         </header>
-                        <div>
+                        <div class="flip-back">
                             <dl>
                                 <dt>Période</dt>
                                 <dd>2007 - 2009</dd>
@@ -474,13 +533,13 @@ body > header nav span {
                         </div>
                     </div>
                 </article>
-                <article ontouchstart="this.classList.toggle('hover');">
-                    <div>
-                        <header>
+                <article class="flip-container flip-trigger" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flip-wrapper">
+                        <header class="flip-face">
                             <h1>Ulule</h1>
                             <img src="references/logo-ulule.png" />
                         </header>
-                        <div>
+                        <div class="flip-back">
                             <dl>
                                 <dt>Période</dt>
                                 <dd>2010 - 2011</dd>
@@ -505,13 +564,13 @@ body > header nav span {
                         </div>
                     </div>
                 </article>
-                <article ontouchstart="this.classList.toggle('hover');">
-                    <div>
-                        <header>
+                <article class="flip-container flip-trigger" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flip-wrapper">
+                        <header class="flip-face">
                             <h1>Libération</h1>
                             <img src="references/logo-liberation.png" />
                         </header>
-                        <div>
+                        <div class="flip-back">
                             <dl>
                                 <dt>Période</dt>
                                 <dd>2011 - 2013</dd>
