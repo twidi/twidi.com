@@ -41,12 +41,8 @@ $avatar-size: 128px;
     opacity: 1;
     @include single-transition(opacity);
 }
-.flip-face {
-    z-index: 2;
-}
 .flip-back {
-    z-index: 1;
-    opacity: 0.1;
+    opacity: 0;
     @include backface-visibility(hidden);
     @include transform(rotateY(-180deg));
 }
@@ -66,10 +62,10 @@ $avatar-size: 128px;
             @include transform(rotateY(-180deg));
         }
         .flip-face {
-            opacity: 0.1;
+            opacity: 0.2;
         }
         .flip-back {
-            opacity: 1;            
+            opacity: 1;
         }
     };
 }
@@ -184,6 +180,8 @@ body > header aside {
         font-weight: bold;
         color: $text-color;
         font-family: $main-font;
+        display: block;
+        @include rounded;
     }
 }
 
@@ -245,29 +243,33 @@ body > header nav {
     }
 }
 
-body > header:hover nav li,
-body > header.hover nav li {
+body > header {
+    &:hover, &.hover {
+        nav li {
 
-    @mixin arround-circle($angle) {
-        $left: cos($angle * pi() / 180) * ($avatar-size / 2 + $nav-icon-size);
-        $top: sin($angle * pi() / 180) * ($avatar-size / 2 + $nav-icon-size);
-        @include transform(translate($left, $top));
-    }
+            @mixin arround-circle($angle) {
+                $left: cos($angle * pi() / 180) * ($avatar-size / 2 + $nav-icon-size);
+                $top: sin($angle * pi() / 180) * ($avatar-size / 2 + $nav-icon-size);
+                @include transform(translate($left, $top));
+            }
 
-    $bottom-angle: 5;
-    $top-angle: 35;
+            $bottom-angle: 5;
+            $top-angle: 35;
 
-    &.mail {
-        @include arround-circle(180 + $bottom-angle);
-    }
-    &.linkedin {
-        @include arround-circle(180 + $top-angle);
-    }
-    &.twitter {
-        @include arround-circle(-$top-angle);
-    }
-    &.github {
-        @include arround-circle(-$bottom-angle);
+            &.mail {
+                @include arround-circle(180 + $bottom-angle);
+            }
+            &.linkedin {
+                @include arround-circle(180 + $top-angle);
+            }
+            &.twitter {
+                @include arround-circle(-$top-angle);
+            }
+            &.github {
+                @include arround-circle(-$bottom-angle);
+            }            
+ 
+        }
     }
 }
 
