@@ -1,0 +1,433 @@
+// override compass default values
+$default-transition-duration : 0.6s;
+
+// import needed compass stuff
+@import "compass/css3/transform";
+@import "compass/css3/transition";
+@import "compass/css3/background-size";
+@import "compass/css3/box-shadow";
+@import "compass/css3/text-shadow";
+@import "compass/css3/border-radius";
+@import "compass/css3/images";
+@import "compass/css3/box-sizing";
+
+// define some useful variables
+$main-font: 'Julius Sans One', sans-serif;
+$title-font: 'Damion', cursive;
+$translucent: rgba(255, 255, 255, 0.7);
+$text-color: #333;
+$separator-color: #ccc;
+$separator-width: 10px;
+$separator-border: solid $separator-color $separator-width;
+$avatar-size: 128px;
+
+@mixin white-text-shadow {
+    @include text-shadow(1px 1px 0 white);
+}
+
+// return a number without its units
+@function strip-units($number) {
+    @return $number / ($number * 0 + 1);
+}
+
+// -----------------------------------------------------------------------------
+// FLIP
+// -----------------------------------------------------------------------------
+
+.flip-face, .flip-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    @include single-transition(opacity);
+}
+.flip-face {
+    z-index: 2;
+}
+.flip-back {
+    z-index: 1;
+    opacity: 0.1;
+    @include backface-visibility(hidden);
+    @include transform(rotateY(-180deg));
+}
+.flip-wrapper {
+    @include transition();
+    @include transform-style(preserve-3d);
+    position: relative;
+}
+
+.flip-container {
+    @include perspective(1000);
+}
+
+.flip-trigger {
+    &:hover, &.hover {
+        .flip-wrapper {
+            @include transform(rotateY(-180deg));
+        }
+        .flip-face {
+            opacity: 0.1;
+        }
+        .flip-back {
+            opacity: 1;            
+        }
+    };
+}
+
+
+// -----------------------------------------------------------------------------
+// GENERAL
+// -----------------------------------------------------------------------------
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Sans-Serif;
+    font-size: 14px;
+}
+main, header {
+    display: block;
+}
+a {
+    text-decoration: none;    
+}
+
+// -----------------------------------------------------------------------------
+// BACKGROUND
+// -----------------------------------------------------------------------------
+
+
+/* fixed not supported on some mobile browser (YES I'M TALKING TO YOU GOOGLE)
+body {
+    background: url(background/background-eiffel.jpg) center top no-repeat fixed;
+    @include background-size(cover);
+}
+*/
+
+body > img.bg {
+    /* Set rules to fill background */
+    min-height: 100%;
+    min-width: 1024px;
+
+    /* Set up proportionate scaling */
+    width: 100%;
+    height: auto;
+
+    /* Set up positioning */
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+// -----------------------------------------------------------------------------
+// HEADER
+// -----------------------------------------------------------------------------
+body > header {
+    position: relative;
+    text-align: center;
+    border-bottom: $separator-border;
+    margin: 0;
+    padding: 20px;
+    padding-bottom: $avatar-size / 2 + $separator-width;
+    background: $translucent;
+    @include box-shadow(rgba(0, 0, 0, 0.3) 0px 1px);
+    h1, h2 {
+        color: $text-color;
+        @include white-text-shadow;
+        font-weight: normal;
+    }
+    h1 {
+        font-family: $title-font;
+        font-size: 64px;
+        margin: 0;
+    }
+    h2 {
+        font-family: $main-font;
+        font-size: 24px;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// PHOTO + CV
+// -----------------------------------------------------------------------------
+@mixin rounded {
+    @include border-radius(50%);
+    width: $avatar-size;
+    height: $avatar-size;    
+}
+body > header aside {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    margin-bottom: $avatar-size / -2 - 2 * $separator-width;
+    margin-left: $avatar-size / -2 - $separator-width;
+    border: $separator-border;
+    background: #eee;
+    @include rounded;
+    @include box-shadow(rgba(0, 0, 0, 0.3) 0px 1px);
+    & > div > div {
+        @include rounded;
+        @include box-shadow(inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px);
+    }
+}
+#main-photo {
+    background: url(stephane-angel/stephane-angel.#{strip-units($avatar-size)}.jpg) center center no-repeat;
+}
+#cv-link {
+    background: $translucent;
+    text-align: center;
+    a {
+        line-height: $avatar-size;
+        font-size: 30px;
+        letter-spacing: 5px;
+        font-weight: bold;
+        color: $text-color;
+        font-family: $main-font;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// ICONS NAV
+// -----------------------------------------------------------------------------
+
+$nav-icon-size: 32px;
+
+body > header nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    height: $avatar-size / 2 + $separator-width + $nav-icon-size / 2;
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    li {
+        display: inline-block;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: $nav-icon-size / -2;
+        @include transition();
+        background: {
+            position: top left;
+            repeat: no-repeat;
+            color: transparent;
+        }
+        &.mail {
+            background-image: url('contact/mail.png');
+        }
+        &.linkedin {
+            background-image: url('contact/linkedin.png');
+        }
+        &.twitter {
+            background-image: url('contact/twitter.png');
+        }
+        &.github {
+            background-image: url('contact/github.png');
+        }
+    }
+    a {
+        display: block;
+        width: $nav-icon-size;
+        height: $nav-icon-size;
+    }
+    span {
+        display: none;
+    }
+}
+
+body > header:hover nav li,
+body > header.hover nav li {
+
+    @mixin arround-circle($angle) {
+        $left: cos($angle * pi() / 180) * ($avatar-size / 2 + $nav-icon-size);
+        $top: sin($angle * pi() / 180) * ($avatar-size / 2 + $nav-icon-size);
+        @include transform(translate($left, $top));
+    }
+
+    $bottom-angle: 5;
+    $top-angle: 35;
+
+    &.mail {
+        @include arround-circle(180 + $bottom-angle);
+    }
+    &.linkedin {
+        @include arround-circle(180 + $top-angle);
+    }
+    &.twitter {
+        @include arround-circle(-$top-angle);
+    }
+    &.github {
+        @include arround-circle(-$bottom-angle);
+    }
+}
+
+
+// -----------------------------------------------------------------------------
+// MAIN REFERENCES
+// -----------------------------------------------------------------------------
+
+#main_references {
+    position: relative;
+    padding: 0 80px 0 48px;
+    margin: 96px auto 0;
+    min-width: 768px;
+    max-width: 1024px;
+    height: 300px;
+    white-space: nowrap;
+
+    @mixin badge {
+        $transparent-gradient: transparentize($translucent, 1);
+
+        font-family: $main-font;
+        text-align: center;
+        @include white-text-shadow;
+
+        background: $translucent;
+        @include background(
+                    linear-gradient(
+                        left,
+                        $transparent-gradient 0%,
+                        $translucent 20%,
+                        $translucent 80%,
+                        $transparent-gradient 100%
+                    )
+                );
+    } // badge
+
+    h1 {
+        $width: 15em;
+        $height: 2em;
+
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        left: -5em;
+        top: 5em;
+        width: $width;
+        line-height: $height;
+        height: $height;
+
+        font-weight: normal;
+        font-size: 17px;
+        color: $text-color;
+
+        @include transform(rotate(-90deg));
+        @include transform-origin(100% 0);
+
+        @include badge;
+    }
+
+    article {
+
+        $logo-width: 128px;
+        $logo-height: 182px;
+        $logo-horizontal-padding: 64px;
+        $logo-vertical-padding: 32px;
+
+        display: inline-block;
+        margin: 0 5px;
+        padding: 0;
+        @include box-sizing(border-box);
+        width: (100% / 3);
+        text-align: center;
+
+        img {
+            width: $logo-width;
+            max-width: 90%;
+        }
+
+        h1 {
+            display: none;
+        }
+
+        & > div {
+            margin: 0 auto;
+            width: $logo-width * 2;
+            min-height: $logo-height + $logo-vertical-padding;
+
+            & > header, & > div {
+                @include box-sizing(border-box);
+                width: $logo-width * 2;
+            }
+
+            & > header {
+                padding: $logo-vertical-padding $logo-horizontal-padding;
+                height: $logo-height + $logo-vertical-padding;
+            }
+
+            & > div {
+                padding: 16px;
+                background: $translucent;
+                @include border-radius(10px);
+                text-align: left;
+                white-space: normal;
+
+                dl {
+                    margin: 0;
+                    padding: 0;
+                }
+                dt {
+                    display: none;
+                }
+                dd {
+                    margin: 0;
+                    padding: 0;
+                    @include white-text-shadow;
+                    &:first-of-type { // years
+                        @include badge;
+                        margin: 0 -16px 8px;
+                        line-height: 2em;
+                        padding-top: 3px;
+                        font-weight: bold;
+                    }
+                }
+
+            } // #main_references article > div > div
+
+        } // #main_references article  > div
+
+    } // #main_references article 
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        &.resume {
+            padding-left: 1em;
+            line-height: 1.8em;
+            li:before {
+                content: "+";
+                padding-right: 1ex;
+                font-weight: bold;
+                color: #aa0000;
+            }
+        } // ul.resume
+
+        &.technos {
+            text-align: center;
+            margin-top: 1ex;
+            font-family: $main-font;
+            font-weight: bold;
+            font-size: 12px;
+            li {
+                display: inline-block;
+                background: $translucent;
+                padding: 5px;
+                margin: 3px 1px;
+                @include border-radius(4px);
+            }
+        } // ul.technos
+
+    } // #main_references ul
+
+} // #main_references
