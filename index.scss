@@ -30,6 +30,26 @@ $avatar-size: 128px;
     @return $number / ($number * 0 + 1);
 }
 
+@mixin badge {
+    $transparent-gradient: transparentize($translucent, 1);
+
+    font-family: $main-font;
+    text-align: center;
+    @include white-text-shadow;
+
+    background: $translucent;
+    @include background(
+                linear-gradient(
+                    left,
+                    $transparent-gradient 0%,
+                    $translucent 20%,
+                    $translucent 80%,
+                    $transparent-gradient 100%
+                )
+            );
+} // badge
+
+
 // -----------------------------------------------------------------------------
 // FLIP
 // -----------------------------------------------------------------------------
@@ -81,6 +101,7 @@ html, body {
     padding: 0;
     font-family: Arial, Sans-Serif;
     font-size: 14px;
+    color: $text-color;
 }
 main, header {
     display: block;
@@ -129,7 +150,6 @@ body > header {
     background: $translucent;
     @include box-shadow(rgba(0, 0, 0, 0.3) 0px 1px);
     h1, h2 {
-        color: $text-color;
         @include white-text-shadow;
         font-weight: normal;
     }
@@ -178,7 +198,7 @@ body > header aside {
         font-size: 30px;
         letter-spacing: 5px;
         font-weight: bold;
-        color: $text-color;
+        color: inherit;
         font-family: $main-font;
         display: block;
         @include rounded;
@@ -273,40 +293,20 @@ body > header {
     }
 }
 
-
 // -----------------------------------------------------------------------------
-// MAIN REFERENCES
+// SECTIONS
 // -----------------------------------------------------------------------------
 
-#main_references {
+$main-section-article-width: 256px;
+
+.main-section {
     position: relative;
-    padding: 0 80px 0 48px;
-    margin: 96px auto 0;
+    padding: 0 48px;
+    margin: 32px auto 0;
     min-width: 768px;
     max-width: 1024px;
-    height: 300px;
-    white-space: nowrap;
-
-    @mixin badge {
-        $transparent-gradient: transparentize($translucent, 1);
-
-        font-family: $main-font;
-        text-align: center;
-        @include white-text-shadow;
-
-        background: $translucent;
-        @include background(
-                    linear-gradient(
-                        left,
-                        $transparent-gradient 0%,
-                        $translucent 20%,
-                        $translucent 80%,
-                        $transparent-gradient 100%
-                    )
-                );
-    } // badge
-
-    h1 {
+    
+    & > h1 {
         $width: 15em;
         $height: 2em;
 
@@ -321,7 +321,6 @@ body > header {
 
         font-weight: normal;
         font-size: 17px;
-        color: $text-color;
 
         @include transform(rotate(-90deg));
         @include transform-origin(100% 0);
@@ -330,18 +329,51 @@ body > header {
     }
 
     article {
-
-        $logo-width: 128px;
-        $logo-height: 182px;
-        $logo-horizontal-padding: 64px;
-        $logo-vertical-padding: 32px;
-
         display: inline-block;
-        margin: 0 5px;
+        margin: 0;
         padding: 0;
         @include box-sizing(border-box);
-        width: (100% / 3);
         text-align: center;
+        width: (100% / 3);
+
+        & > div {
+            margin: 0 auto;
+            width: $main-section-article-width;
+
+            & > header, & > div {
+                @include box-sizing(border-box);
+                width: $main-section-article-width;
+            }
+
+        }
+    }
+
+} // .main-section
+
+@mixin main-section-article-title {
+    @include badge;
+    margin: 0 -16px 8px;
+    line-height: 2em;
+    padding-top: 3px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+
+// -----------------------------------------------------------------------------
+// MAIN REFERENCES
+// -----------------------------------------------------------------------------
+
+#main_references {
+    height: 300px;
+    margin-top: 92px;
+
+    article {
+
+        $logo-width: $main-section-article-width / 2;
+        $logo-height: 182px;
+        $logo-horizontal-padding: ($main-section-article-width - $logo-width) / 2;
+        $logo-vertical-padding: 32px;
 
         img {
             width: $logo-width;
@@ -353,14 +385,7 @@ body > header {
         }
 
         & > div {
-            margin: 0 auto;
-            width: $logo-width * 2;
             min-height: $logo-height + $logo-vertical-padding;
-
-            & > header, & > div {
-                @include box-sizing(border-box);
-                width: $logo-width * 2;
-            }
 
             & > header {
                 padding: $logo-vertical-padding $logo-horizontal-padding;
@@ -372,7 +397,6 @@ body > header {
                 background: $translucent;
                 @include border-radius(10px);
                 text-align: left;
-                white-space: normal;
 
                 dl {
                     margin: 0;
@@ -386,11 +410,7 @@ body > header {
                     padding: 0;
                     @include white-text-shadow;
                     &:first-of-type { // years
-                        @include badge;
-                        margin: 0 -16px 8px;
-                        line-height: 2em;
-                        padding-top: 3px;
-                        font-weight: bold;
+                        @include main-section-article-title;
                     }
                 }
 
@@ -433,3 +453,60 @@ body > header {
     } // #main_references ul
 
 } // #main_references
+
+
+// -----------------------------------------------------------------------------
+// OTHER REFERENCES
+// -----------------------------------------------------------------------------
+
+#other_references {
+
+    article {
+        margin-bottom: 32px;
+        > div {
+            $height: 128px;
+            height: $height;
+
+            h1 {
+                @include main-section-article-title;
+            }
+
+            > header, > div {
+                height: $height;
+                padding: 16px;
+                background: $translucent;
+                @include border-radius(10px);
+            }
+
+            > header {
+                background: transparentize($translucent, 0.25);
+                h1 {
+                    font-size: 18px;
+                }
+                h2 {
+                    font-weight: normal;
+                    @include white-text-shadow;
+                    font-size: 18px;
+                }
+            }
+
+            > div {
+                p {
+                    @include white-text-shadow;                    
+                    line-height: 1.8em;
+                    a {
+                        font-weight: bold;
+                        color: inherit;
+                    }
+                }
+            }
+        } // .article > div
+
+        &.vous {
+            header h2 {
+                white-space: nowrap;
+            }
+        }
+
+    } // article
+}
