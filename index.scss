@@ -23,12 +23,25 @@ $separator-shadow-color: rgba(0, 0, 0, 0.3);
 $separator-shadow: $separator-shadow-color 0px 2px 2px;
 $avatar-size: 128px;
 
+@mixin media-max-width($max-width) {
+    @media screen and (max-width: $max-width) {
+        @content;
+    }    
+}
+
 $two-cols-breakpoint: 960px;
 @mixin media-two-cols {
-    @media screen and (max-width: $two-cols-breakpoint) {
+    @include media-max-width($two-cols-breakpoint) {
         @content;
     }
-}    
+}
+
+$one-col-breakpoint: 620px;
+@mixin media-one-col {
+    @include media-max-width($one-col-breakpoint) {
+        @content;
+    }
+}
 
 @mixin white-text-shadow {
     @include text-shadow(1px 1px 0 white);
@@ -322,6 +335,11 @@ $nb-cols: 3;
         min-width: $main-section-article-width * $new-nb-cols;
         max-width: $main-section-article-width * ($new-nb-cols + 1);
     }
+    @include media-one-col {
+        $new-nb-cols: 1;
+        min-width: $main-section-article-width * $new-nb-cols;
+        max-width: $main-section-article-width * ($new-nb-cols + 1);
+    }
 
     & > h1 {
         $width: 15em;
@@ -330,7 +348,7 @@ $nb-cols: 3;
         margin: 0;
         padding: 0;
         position: absolute;
-        left: -5em;
+        left: -6em;
         top: 5em;
         width: $width;
         line-height: $height;
@@ -354,6 +372,10 @@ $nb-cols: 3;
         width: 100% / $nb-cols;
         @include media-two-cols {
             $new-nb-cols: 2;
+            width: 100% / $new-nb-cols;
+        }
+        @include media-one-col {
+            $new-nb-cols: 1;
             width: 100% / $new-nb-cols;
         }
 
