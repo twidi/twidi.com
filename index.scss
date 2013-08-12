@@ -19,6 +19,8 @@ $text-color: #333;
 $separator-color: #ccc;
 $separator-width: 10px;
 $separator-border: solid $separator-color $separator-width;
+$separator-shadow-color: rgba(0, 0, 0, 0.3);
+$separator-shadow: $separator-shadow-color 0px 2px 2px;
 $avatar-size: 128px;
 
 @mixin white-text-shadow {
@@ -148,7 +150,7 @@ body > header {
     padding: 20px;
     padding-bottom: $avatar-size / 2 + $separator-width;
     background: $translucent;
-    @include box-shadow(rgba(0, 0, 0, 0.3) 0px 1px);
+    @include box-shadow($separator-shadow);
     h1, h2 {
         @include white-text-shadow;
         font-weight: normal;
@@ -181,7 +183,7 @@ body > header aside {
     border: $separator-border;
     background: #eee;
     @include rounded;
-    @include box-shadow(rgba(0, 0, 0, 0.3) 0px 1px);
+    @include box-shadow($separator-shadow-color 0px 1px);
     & > div > div {
         @include rounded;
         @include box-shadow(inset rgba(0, 0, 0, 0.6) 0px 0px 3px 1px);
@@ -293,8 +295,9 @@ body > header {
     }
 }
 
+
 // -----------------------------------------------------------------------------
-// SECTIONS
+// MAIN SECTIONS
 // -----------------------------------------------------------------------------
 
 $main-section-article-width: 256px;
@@ -302,7 +305,7 @@ $main-section-article-width: 256px;
 .main-section {
     position: relative;
     padding: 0 48px;
-    margin: 32px auto 0;
+    margin: 64px auto 32px;
     min-width: 768px;
     max-width: 1024px;
     
@@ -367,6 +370,7 @@ $main-section-article-width: 256px;
 #main_references {
     height: 300px;
     margin-top: 92px;
+    margin-bottom: 0;
 
     article {
 
@@ -479,7 +483,7 @@ $main-section-article-width: 256px;
             }
 
             > header {
-                background: transparentize($translucent, 0.25);
+                background: transparentize($translucent, 0.4);
                 h1 {
                     font-size: 18px;
                 }
@@ -509,4 +513,32 @@ $main-section-article-width: 256px;
         }
 
     } // article
+}
+
+// -----------------------------------------------------------------------------
+// SECONDARY SECTIONS
+// -----------------------------------------------------------------------------
+
+.secondary-section {
+    opacity: 0.999; //   don't know why but necessary to display things
+
+    font-family: $main-font;
+    font-size: 24px;
+    text-align: center;
+
+    background: $translucent;
+
+    border-top: $separator-border;
+    border-bottom: $separator-border;
+    @include box-shadow(
+        $separator-shadow
+        ,rgba(255, 255, 255, 0.7) 0 -1px 1px
+        ,inset $separator-shadow-color 0 1px
+    );
+
+    padding: 32px 0;
+
+    p {
+        margin: 0;
+    }
 }
