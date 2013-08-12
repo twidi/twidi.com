@@ -610,5 +610,9 @@ $main-section-article-width: 256px;
 
     p {
         margin: 0;
+        a {
+            color: inherit;
+            font-weight: bold;
+        }
     }
 }
