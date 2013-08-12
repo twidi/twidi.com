@@ -460,7 +460,7 @@ $main-section-article-width: 256px;
 
 
 // -----------------------------------------------------------------------------
-// OTHER REFERENCES, ACHIEVEMENTS
+// OTHER REFERENCES, ACHIEVEMENTS, OPEN-SOURCE
 // -----------------------------------------------------------------------------
 
 @mixin main-section-height($height) {
@@ -474,7 +474,7 @@ $main-section-article-width: 256px;
     }
 }
 
-#other_references, #achievements {
+#other_references, #achievements, #open_source {
 
     article {
         margin-bottom: 32px;
@@ -526,9 +526,13 @@ $main-section-article-width: 256px;
         @include badge;
         padding: 10px 8em;
         margin-bottom: 48px;
+        a {
+            color: inherit;
+            font-weight: bold;
+        }
     }
 
-} // #other_references, #achievements
+} // #other_references, #achievements, #open_source
 
 #other_references {
     @include main-section-height(128px);
@@ -563,6 +567,20 @@ $main-section-article-width: 256px;
         }
     }
 } // #achievements
+
+#open_source {
+    @include main-section-height(128px);
+    article {
+        > div {
+            > div {
+                p a {
+                    font-weight: normal;
+                    display: block;
+                }
+            }
+        }
+    }
+} // #open_source
 
 // -----------------------------------------------------------------------------
 // SECONDARY SECTIONS
