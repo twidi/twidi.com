@@ -80,12 +80,9 @@ $one-col-breakpoint: 620px;
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 1;
-    @include single-transition(opacity);
+    @include backface-visibility(hidden);
 }
 .flip-back {
-    opacity: 0;
-    @include backface-visibility(hidden);
     @include transform(rotateY(-180deg));
 }
 .flip-wrapper {
@@ -102,12 +99,6 @@ $one-col-breakpoint: 620px;
     &:hover, &.hover {
         .flip-wrapper {
             @include transform(rotateY(-180deg));
-        }
-        .flip-face {
-            opacity: 0.2;
-        }
-        .flip-back {
-            opacity: 1;
         }
     };
 }
