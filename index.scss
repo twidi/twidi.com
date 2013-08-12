@@ -460,25 +460,32 @@ $main-section-article-width: 256px;
 
 
 // -----------------------------------------------------------------------------
-// OTHER REFERENCES
+// OTHER REFERENCES, ACHIEVEMENTS
 // -----------------------------------------------------------------------------
 
-#other_references {
+@mixin main-section-height($height) {
+    article {
+        > div {
+            height: $height;
+            > header, > div {
+                height: $height;
+            }
+        }
+    }
+}
+
+#other_references, #achievements {
 
     article {
         margin-bottom: 32px;
         > div {
-            $height: 128px;
-            height: $height;
 
             h1 {
                 @include main-section-article-title;
             }
 
             > header, > div {
-                height: $height;
                 padding: 16px;
-                background: $translucent;
                 @include border-radius(10px);
             }
 
@@ -495,33 +502,67 @@ $main-section-article-width: 256px;
             }
 
             > div {
-                p {
-                    @include white-text-shadow;                    
+                background: $translucent;
+                p, ul {
+                    @include white-text-shadow;
                     line-height: 1.8em;
                     a {
                         font-weight: bold;
                         color: inherit;
                     }
                 }
+                ul {
+                    text-align: left;
+                }
             }
         } // .article > div
 
-        &.vous {
-            header h2 {
-                white-space: nowrap;
-            }
-        }
-
     } // article
 
-    > p {
+    > p.more {
         text-align: center;
         font-size: 15px;
         font-style: italic;
         @include badge;
-        padding: 10px 0;
+        padding: 10px 8em;
+        margin-bottom: 48px;
     }
-}
+
+} // #other_references, #achievements
+
+#other_references {
+    @include main-section-height(128px);
+    article.vous {
+        header h2 {
+            white-space: nowrap;
+        }
+    }
+
+} // #other_references
+
+#achievements {
+    @include main-section-height(192px);
+    article {
+        > div {
+            > header {
+                h2 {
+                    margin-top: 2em;
+                }
+            }
+            > div {
+                p a {
+                    font-weight: normal;
+                    display: block;
+                }
+            }
+        }
+        &.feu {
+            li {
+                cursor: default;
+            }
+        }
+    }
+} // #achievements
 
 // -----------------------------------------------------------------------------
 // SECONDARY SECTIONS
