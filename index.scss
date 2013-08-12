@@ -513,6 +513,14 @@ $main-section-article-width: 256px;
         }
 
     } // article
+
+    > p {
+        text-align: center;
+        font-size: 15px;
+        font-style: italic;
+        @include badge;
+        padding: 10px 0;
+    }
 }
 
 // -----------------------------------------------------------------------------
