@@ -23,6 +23,13 @@ $separator-shadow-color: rgba(0, 0, 0, 0.3);
 $separator-shadow: $separator-shadow-color 0px 2px 2px;
 $avatar-size: 128px;
 
+$two-cols-breakpoint: 960px;
+@mixin media-two-cols {
+    @media screen and (max-width: $two-cols-breakpoint) {
+        @content;
+    }
+}    
+
 @mixin white-text-shadow {
     @include text-shadow(1px 1px 0 white);
 }
@@ -301,14 +308,21 @@ body > header {
 // -----------------------------------------------------------------------------
 
 $main-section-article-width: 256px;
+$nb-cols: 3;
 
 .main-section {
     position: relative;
     padding: 0 48px;
     margin: 64px auto 32px;
-    min-width: 768px;
-    max-width: 1024px;
-    
+    text-align: center;
+    min-width: $main-section-article-width * $nb-cols;
+    max-width: $main-section-article-width * ($nb-cols + 1);
+    @include media-two-cols {
+        $new-nb-cols: 2;
+        min-width: $main-section-article-width * $new-nb-cols;
+        max-width: $main-section-article-width * ($new-nb-cols + 1);
+    }
+
     & > h1 {
         $width: 15em;
         $height: 2em;
@@ -337,7 +351,11 @@ $main-section-article-width: 256px;
         padding: 0;
         @include box-sizing(border-box);
         text-align: center;
-        width: (100% / 3);
+        width: 100% / $nb-cols;
+        @include media-two-cols {
+            $new-nb-cols: 2;
+            width: 100% / $new-nb-cols;
+        }
 
         & > div {
             margin: 0 auto;
@@ -368,7 +386,6 @@ $main-section-article-width: 256px;
 // -----------------------------------------------------------------------------
 
 #main_references {
-    height: 300px;
     margin-top: 92px;
     margin-bottom: 0;
 
@@ -389,11 +406,12 @@ $main-section-article-width: 256px;
         }
 
         & > div {
-            min-height: $logo-height + $logo-vertical-padding;
+            $height: $logo-height + $logo-vertical-padding * 2; 
+            height: $height;
 
             & > header {
                 padding: $logo-vertical-padding $logo-horizontal-padding;
-                height: $logo-height + $logo-vertical-padding;
+                height: $height;
             }
 
             & > div {
