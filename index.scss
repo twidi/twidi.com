@@ -565,6 +565,10 @@ $nb-cols: 3;
         font-style: italic;
         @include badge;
         padding: 10px 8em;
+        @include media-one-col {
+            padding-right: 2em;
+            padding-left: 2em;
+        }
         margin-bottom: 48px;
         a {
             color: inherit;
@@ -646,7 +650,7 @@ $nb-cols: 3;
         ,inset $separator-shadow-color 0 1px
     );
 
-    padding: 32px 0;
+    padding: 32px 1ex;
 
     p {
         margin: 0;
