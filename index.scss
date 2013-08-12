@@ -572,6 +572,9 @@ $main-section-article-width: 256px;
     @include main-section-height(128px);
     article {
         > div {
+            > header {
+                background: transparent;
+            }
             > div {
                 p a {
                     font-weight: normal;
