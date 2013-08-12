@@ -146,8 +146,8 @@ body {
 
 body > img.bg {
     /* Set rules to fill background */
+    min-width: 0;
     min-height: 100%;
-    min-width: 1024px;
 
     /* Set up proportionate scaling */
     width: 100%;
