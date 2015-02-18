@@ -363,11 +363,11 @@ $nb-cols: 3;
         width: 100% / $nb-cols;
         @include media-two-cols {
             $new-nb-cols: 2;
-            width: 100% / $new-nb-cols;
+            width: 100% / $new-nb-cols !important;
         }
         @include media-one-col {
             $new-nb-cols: 1;
-            width: 100% / $new-nb-cols;
+            width: 100% / $new-nb-cols !important;
         }
 
         & > div {
@@ -382,7 +382,15 @@ $nb-cols: 3;
         }
     }
 
+
 } // .main-section
+
+// special case: 4 cols on the main references section
+#main_references article {
+    $main-nb-cols: 4;
+    width: 100% / $main-nb-cols;
+}
+
 
 @mixin main-section-article-title {
     @include badge;
