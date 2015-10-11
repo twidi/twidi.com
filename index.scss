@@ -265,6 +265,18 @@ body > header nav {
         &.github {
             background-image: url('contact/github.png');
         }
+        &.medium, &.instagram {
+            left: auto;
+            right: -32px;
+            bottom: -32px;
+            opacity: 0.8;
+        }
+        &.medium {
+            background-image: url('contact/medium.png');
+        }
+        &.instagram {
+            background-image: url('contact/instagram.png');
+        }
     }
     a {
         display: block;
@@ -300,8 +312,14 @@ body > header {
             }
             &.github {
                 @include arround-circle(-$bottom-angle);
-            }            
- 
+            }
+            &.medium {
+                @include transform(translate(-40px, -32px - 8px))
+            }
+            &.instagram {
+                @include transform(translate(-40px, -32px - 55px))
+            }
+
         }
     }
 }
