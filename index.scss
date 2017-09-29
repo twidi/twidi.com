@@ -265,10 +265,10 @@ body > header nav {
         &.github {
             background-image: url('contact/github.png');
         }
-        &.medium, &.instagram {
+        &.medium, &.instagram, &.talks {
             left: auto;
-            right: -32px;
-            bottom: -32px;
+            right: -$nav-icon-size;
+            bottom: -$nav-icon-size;
             opacity: 0.8;
         }
         &.medium {
@@ -276,6 +276,9 @@ body > header nav {
         }
         &.instagram {
             background-image: url('contact/instagram.png');
+        }
+        &.talks {
+            background-image: url('contact/talks.png');
         }
     }
     a {
@@ -287,6 +290,9 @@ body > header nav {
         display: none;
     }
 }
+
+$nav-icon-solo-margin: 8px;
+$nav-icon-solo-delta: 47px;
 
 body > header {
     &:hover, &.hover {
@@ -314,10 +320,13 @@ body > header {
                 @include arround-circle(-$bottom-angle);
             }
             &.medium {
-                @include transform(translate(-40px, -32px - 8px))
+                @include transform(translate(-$nav-icon-size - $nav-icon-solo-margin, -$nav-icon-size - $nav-icon-solo-margin))
             }
             &.instagram {
-                @include transform(translate(-40px, -32px - 55px))
+                @include transform(translate(-$nav-icon-size - $nav-icon-solo-margin, -$nav-icon-size - $nav-icon-solo-margin - $nav-icon-solo-delta))
+            }
+            &.talks {
+                @include transform(translate(-$nav-icon-size - $nav-icon-solo-margin - $nav-icon-solo-delta, -$nav-icon-size - $nav-icon-solo-margin))
             }
 
         }
