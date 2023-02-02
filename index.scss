@@ -264,6 +264,7 @@ body > header nav {
             position: top left;
             repeat: no-repeat;
             color: transparent;
+	    size: $nav-icon-size $nav-icon-size;
         }
         &.mail {
             background-image: url('contact/mail.png');
@@ -283,6 +284,12 @@ body > header nav {
             bottom: -$nav-icon-size;
             opacity: 0.8;
         }
+        &.mastodon, &.twitch, &.youtube{
+            right: auto;
+            left: -20px;
+            bottom: -$nav-icon-size;
+            opacity: 0.8;
+        }
         &.medium {
             background-image: url('contact/medium.png');
         }
@@ -291,6 +298,15 @@ body > header nav {
         }
         &.talks {
             background-image: url('contact/talks.png');
+        }
+        &.mastodon {
+            background-image: url('contact/mastodon.png');
+        }
+        &.twitch {
+            background-image: url('contact/twitch.png');
+        }
+        &.youtube {
+            background-image: url('contact/youtube.png');
         }
     }
     a {
@@ -339,6 +355,15 @@ body > header {
             }
             &.talks {
                 @include transform(translate(-$nav-icon-size - $nav-icon-solo-margin - $nav-icon-solo-delta, -$nav-icon-size - $nav-icon-solo-margin))
+            }
+            &.twitch {
+                @include transform(translate($nav-icon-size + $nav-icon-solo-margin, -$nav-icon-size - $nav-icon-solo-margin - $nav-icon-solo-delta))
+            }
+            &.youtube {
+                @include transform(translate($nav-icon-size + $nav-icon-solo-margin + $nav-icon-solo-delta, -$nav-icon-size - $nav-icon-solo-margin))
+            }
+            &.mastodon {
+                @include transform(translate($nav-icon-size + $nav-icon-solo-margin, -$nav-icon-size - $nav-icon-solo-margin))
             }
 
         }
